@@ -19,7 +19,7 @@ public class DamageObject : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<HPobject>().TakeDamage(damage);
-        Debug.Log(other.GetComponent<HPobject>().hp);
+		other.GetComponent<hp_object>().TakeDamage(damage);
+		Debug.Log(other.GetComponent<hp_object>().hp);
     }
 }

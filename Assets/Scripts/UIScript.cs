@@ -6,30 +6,44 @@ using UnityEngine.SceneManagement;
 public class UIScript : MonoBehaviour {
 
     public Text hpBar;
-    public Text timeBar;
-    float time; 
+	public GameObject timeBar;
+	public static float time; 
+	public GameObject info;
     GameObject player;
-    int currentLevel = Application.loadedLevel;
+
+	void Awake()
+	{
+		Time.timeScale = 0;
+
+	}
+
     void Start ()
     {
+		time = 0;
         player = GameObject.FindWithTag("Player");
 	}
 	
 	void Update ()
     {
-        time += Time.deltaTime;
-        hpBar.text = "HP: "+(player.GetComponent<HPobject>().hp);
-        timeBar.text = "Time: " + time.ToString("#.00");
-        if (player.GetComponent<HPobject>().hp < 1)
-        {
-            player.GetComponent<HPobject>().hp = 0;
-            StartCoroutine(Lose());
-        }	
-	}
+		if (Input.GetKey(KeyCode.E))
+		{
+			Time.timeScale = 1;
+			info.SetActive (false);
+			timeBar.SetActive (true);
+		}
 
-    IEnumerator Lose()
-    {
-        yield return new WaitForSeconds(10);
-        Application.LoadLevel(currentLevel + 1);
-    }
+		if (Input.GetKey(KeyCode.R))
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
+
+        UIScript.time += Time.deltaTime;
+		hpBar.text = "HP: "+(player.GetComponent<hp_object>().hp);
+		timeBar.GetComponent<Text>().text = "Time: " + time.ToString("#.00");
+
+		if (player.GetComponent<hp_object>().hp < 1)
+        {
+			player.GetComponent<hp_object>().hp = 0;
+        }
+	}
 }

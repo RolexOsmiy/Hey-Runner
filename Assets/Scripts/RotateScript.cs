@@ -4,6 +4,7 @@ using System.Collections;
 public class RotateScript : MonoBehaviour {
 
     public float rotateSpeed = 30f;
+	public AudioClip sound;
     bool flag = true;
 
     void Start()
@@ -12,7 +13,7 @@ public class RotateScript : MonoBehaviour {
     }
     void Update()
     {
-        if (transform.eulerAngles.z >= 130)
+        if (transform.eulerAngles.z >= 170)
         {
             flag = true;
         }

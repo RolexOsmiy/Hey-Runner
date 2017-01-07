@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 
 public class Level_Manager : MonoBehaviour {
 
-    public string level;
-    int currentLevel = SceneManager.GetActiveScene().buildIndex;
+	int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
 
-    void OnTriggerEnter(Collider other)
+	public void NextLevelButton()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            StartCoroutine(Win());
-        }
+		SceneManager.LoadScene(nextScene);
     }
 
-    IEnumerator Win()
-    {
-        yield return new WaitForSeconds(10);
-        Application.LoadLevel(currentLevel + 1);
-    }
+	public void RestartLevelButton()
+	{
+		Application.LoadLevel(Application.loadedLevel);
+	}
+
+	public void ExitLevelButton()
+	{
+		Application.LoadLevel(0);
+	}
 
 }
