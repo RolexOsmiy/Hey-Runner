@@ -35,11 +35,12 @@ public class HSController : MonoBehaviour
 	}
 
 	private string secretKey = "3377513"; // Edit this value and make sure it's the same as the one stored on the server
-	string addScoreURL = "rolexosmiy.bplaced.net/addscore.php?";
-	string highscoreURL = "rolexosmiy.bplaced.net/display.php";
+	string addScoreURL = "namsilat.com/test/game/addscore.php";
+	string highscoreURL = "namsilat.com/test/game/display.php";
 
 	//for testing
 	public string uniqueID;
+	public string levelID;
 	public string name3;
 	float score;
 
@@ -62,6 +63,7 @@ public class HSController : MonoBehaviour
 		// uniqueID,name3 and score will get the actual value before posting score
 		uniqueID = ""+GetInstanceID(); //Replace this TestScript variable into your game-variables
 		name3 = MainMenuScript.playerName;
+		levelID = MainMenuScript.levelID;
 		score = UIScript.time;
 	}
 
@@ -93,7 +95,7 @@ public class HSController : MonoBehaviour
 		// Supply it with a string representing the players name and the players score.
 		string hash = Md5Sum(name3 + score + secretKey);
 		//string post_url = addScoreURL + "name=" + WWW.EscapeURL(name) + "&score=" + score + "&hash=" + hash;
-		string post_url = addScoreURL + "uniqueID=" + uniqueID+ "&name=" + WWW.EscapeURL (name3) + "&score=" + score+ "&hash=" + hash;
+		string post_url = addScoreURL + "?uniqueID=" + uniqueID+ "&name=" + WWW.EscapeURL (name3)+ "&level=" + WWW.EscapeURL (levelID) + "&score=" + score+ "&hash=" + hash;
 		//Debug.Log ("post url " + post_url);
 		// Post the URL to the site and create a download object to get the result.
 		WWW hs_post = new WWW("http://"+post_url);
@@ -109,11 +111,9 @@ public class HSController : MonoBehaviour
 	// remember to use StartCoroutine when calling this function!
 	IEnumerator GetScores()
 	{
-
-
 		Scrolllist.Instance.loading = true;
 
-		WWW hs_get = new WWW("http://"+highscoreURL);
+		WWW hs_get = new WWW("http://"+highscoreURL+"?level="+levelID);
 
 		yield return hs_get;
 		
