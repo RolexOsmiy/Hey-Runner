@@ -13,5 +13,5 @@ public class TestScript : MonoBehaviour {
 	public string UniqueID;
 	public string Name;
 	public int Score;
-
+	public string levelID;
 }
