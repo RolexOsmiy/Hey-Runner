@@ -63,7 +63,7 @@ public class HSController : MonoBehaviour
 		// uniqueID,name3 and score will get the actual value before posting score
 		uniqueID = ""+GetInstanceID(); //Replace this TestScript variable into your game-variables
 		name3 = MainMenuScript.playerName;
-		levelID = MainMenuScript.levelID;
+		//levelID = MainMenuScript.levelID;
 		score = UIScript.time;
 	}
 
